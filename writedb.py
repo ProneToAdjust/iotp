@@ -12,13 +12,12 @@ PASSWORD = 'root'
 DBNAME = 'mydb'
 HOST = 'localhost'
 PORT = 8086
-dbclient = None;
+dbclient = None
 
 mqtt_broker = "m2m.eclipse.org"
 topic = "iotp/tph"
 my_mqtt = None
 
-pointValues = []
 sensorData = 0
 
 def main():
