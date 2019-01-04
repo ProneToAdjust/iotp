@@ -8,11 +8,8 @@ topic = "iotp/tph"
  
 while True:
  
-	# temperature,pressure,humidity = bme280.readBME280All()
 	tph = bme280.readBME280All()
 	 
-	#print (tph)
-	
 	payload = json.dumps(tph)
 	
 	my_mqtt = mqtt.Client()
@@ -22,7 +19,6 @@ while True:
 	print("--connected to broker")
 	
 	try:
-		#my_mqtt.publish(topic, pay_load)
 		my_mqtt.publish(topic,payload)
 		print(payload)
 		
