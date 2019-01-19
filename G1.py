@@ -26,16 +26,17 @@ def foo():
 def set_value(val):
 	global prev_val
 
-	if prev_val != val:
-
-		if val == 1:
-			f = open("brightness_variable.txt", "r")
-			file_val = int(f.read())
+	if val == 1:
+		
+		f = open("brightness_variable.txt", "r")
+		file_val = int(f.read())
+		
+		if prev_val != file_val:
 			change_brightness(file_val)
-		elif val == 0:
-			change_brightness(0)
-
-		prev_val = val
+			prev_val = val
+			
+	elif val == 0:
+		change_brightness(0)
 
 
 def change_brightness(brightness_var):
@@ -51,16 +52,6 @@ def change_brightness(brightness_var):
 
 	elif brightness_var == 4:
 		p.ChangeDutyCycle(100)
-
-	# elif brightness_var == 4:
-	# 	p.stop()
-	# 	G.cleanup()
-	# 	f = open("var.txt", "w")
-	# 	f.write("1")
-	# 	f.close()
-	# 	print("Exited")
-	# 	exit()
-
 
 foo()
 

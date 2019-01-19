@@ -8,10 +8,21 @@ my_mqtt = None
 
 def onMessage(client, userdata, message):
 	m_decode=str(message.payload.decode("utf-8","ignore"))
-	f = open("var.txt","w")
-	f.write(m_decode)
-	f.close()
 	print(m_decode)
+	first_arg = m_decode
+	
+	if((int(first_arg) != 0) and (int(first_arg) != 1)):
+		print("first_arg brightness val: "+first_arg)
+		f = open("brightness_variable.txt","w+")
+		f.write(first_arg)
+		f.close()
+		print("brightness var file written")
+	elif(int(first_arg) == 0) or (int(first_arg) == 1):
+		print("first_arg on/off: "+first_arg)
+		f = open("on_off_variable.txt","w+")
+		f.write(first_arg)
+		f.close()
+		print("on off var file written")
 
 def startMQTT():
 	my_mqtt = mqtt.Client()
