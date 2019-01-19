@@ -22,31 +22,31 @@
 	switch($_POST['submitted'])
 	{
 		case "ON":
-		$OFFpython = "sudo python /var/www/html/G1.py > /dev/null &";
+		$OFFpython = "sudo python /var/www/html/setTextFile.py 1";
 		$cmd = exec($OFFpython);
 		echo "ON";
 		break;
 		
 		case "LOW":
-		$OFFpython = "sudo python /var/www/html/setTextFile.py 1";
+		$OFFpython = "sudo python /var/www/html/setTextFile.py 2";
 		$cmd = exec($OFFpython);
 		echo "LOW";
 		break;
 		
 		case "MED":
-		$OFFpython = "sudo python /var/www/html/setTextFile.py 2";
+		$OFFpython = "sudo python /var/www/html/setTextFile.py 3";
 		$cmd = exec($OFFpython);
 		echo "MED";
 		break;
 		
 		case "HIGH":
-		$OFFpython = "sudo python /var/www/html/setTextFile.py 3";
+		$OFFpython = "sudo python /var/www/html/setTextFile.py 4";
 		$cmd = exec($OFFpython);
 		echo "HIGH";
 		break;
 		
 		case "OFF":
-		$OFFpython = "sudo python /var/www/html/setTextFile.py 4";
+		$OFFpython = "sudo python /var/www/html/setTextFile.py 0";
 		$cmd = exec($OFFpython);
 		echo "OFF";
 		break;

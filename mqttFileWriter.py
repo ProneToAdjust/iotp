@@ -3,7 +3,7 @@ import json
 import paho.mqtt.client as mqtt
 
 mqtt_broker = "m2m.eclipse.org"
-topic_cpu = "iotp/tph"
+topic_cpu = "iotp/fanControl"
 my_mqtt = None
 
 def onMessage(client, userdata, message):
