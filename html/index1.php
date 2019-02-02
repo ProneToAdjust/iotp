@@ -1,5 +1,7 @@
 <?php echo "Fan Control"?>
 
+<!-- form to control on/off of led -->
+
 <FORM action="<?=$_SERVER['PHP_SELF']?>" method = "post">
 
 <input type="submit" name="submitted" value="ON"/>
@@ -9,6 +11,8 @@
 
 <?php echo "Brightness Control"?>
 
+<!-- form to control brightness of led -->
+
 <FORM action="<?=$_SERVER['PHP_SELF']?>" method = "post">
 
 <input type="submit" name="submitted" value="LOW"/>
@@ -16,6 +20,8 @@
 <input type="submit" name="submitted" value="HIGH"/>
 
 </FORM>
+
+<!-- switch case to control the on/off and brightness of led -->
 
 <?php
 
