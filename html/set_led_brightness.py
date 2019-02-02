@@ -1,60 +1,62 @@
 import RPi.GPIO as G
 import sys
-import time as t
-import threading
+from time import sleep
+from threading import Timer
+
 
 # set up gpio
 G.setmode(G.BCM)
 G.setwarnings(False)
 G.setup(27, G.OUT)
-p = G.PWM(27, 500)
-p.start(0)
+fan_pwm = G.PWM(27, 500)
+fan_pwm.start(0)
 
 file_read_write = open("on_off_variable.txt", "w+")
 file_read_write.write("0")
 file_read_write.close()
+
 prev_val = 0
 
 
-def foo():
-	threading.Timer(0.1, foo).start()
+def on_off_file_checker():
+	Timer(0.1, on_off_file_checker).start()
 	f = open("on_off_variable.txt", "r")
 	file_val = int(f.read())
 	set_value(file_val)
 
 
-def set_value(val):
+def set_value(on_off_val):
 	global prev_val
 
-	if val == 1:
+	if on_off_val == 1:
 		
 		f = open("brightness_variable.txt", "r")
 		file_val = int(f.read())
 		
 		if prev_val != file_val:
 			change_brightness(file_val)
-			prev_val = val
+			prev_val = on_off_val
 			
-	elif val == 0:
+	elif on_off_val == 0:
 		change_brightness(0)
 
 
 def change_brightness(brightness_var):
 
 	if brightness_var == 0:
-		p.ChangeDutyCycle(0)
+		fan_pwm.ChangeDutyCycle(0)
 
 	elif brightness_var == 2:
-		p.ChangeDutyCycle(25)
+		fan_pwm.ChangeDutyCycle(25)
 
 	elif brightness_var == 3:
-		p.ChangeDutyCycle(50)
+		fan_pwm.ChangeDutyCycle(50)
 
 	elif brightness_var == 4:
-		p.ChangeDutyCycle(100)
+		fan_pwm.ChangeDutyCycle(100)
 
-foo()
+on_off_file_checker()
 
 while True:
-	t.sleep(0.1)
+	sleep(0.1)
 	continue
