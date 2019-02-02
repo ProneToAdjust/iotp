@@ -24,12 +24,16 @@ def main():
 	dbclient = InfluxDBClient(HOST, PORT, USER, PASSWORD, DBNAME)
 	startMQTT()
 	while True:
+	"""
 		if sensorData:
 			data_point = getSensorData()
 			dbclient.write_points(data_point)
 			print(data_point)
 			print("Written data")
 			time.sleep(2)
+	"""
+		continue
+	
 
 def getSensorData():
 	now = time.gmtime()
@@ -55,6 +59,12 @@ def onMessage(client, userdata, message):
 	tph = json.loads(m_decode)
 		
 	sensorData = tph[0]
+	
+	if sensorData:
+			data_point = getSensorData()
+			dbclient.write_points(data_point)
+			print(data_point)
+			print("Written data")
 	
 def startMQTT():
 	my_mqtt = mqtt.Client()

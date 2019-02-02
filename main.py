@@ -1,3 +1,4 @@
+import smbus2
 import bme280
 import time
 import paho.mqtt.client as mqtt
@@ -5,11 +6,23 @@ import json
 
 mqtt_broker = "m2m.eclipse.org"
 topic = "iotp/tph"
+
+port = 1
+address = 0x76
+bus = smbus2.SMBus(port)
+
+tph = [None,None,None]
+
+calibration_params = bme280.load_calibration_params(bus, address)
  
 while True:
  
-	tph = bme280.readBME280All()
-	 
+	data = bme280.sample(bus, address, calibration_params)
+	
+	tph[0] = data.temperature
+	tph[1] = data.pressure
+	tph[2] = data.humidity
+	
 	payload = json.dumps(tph)
 	
 	my_mqtt = mqtt.Client()
